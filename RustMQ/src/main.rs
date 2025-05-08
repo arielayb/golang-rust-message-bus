@@ -1,5 +1,6 @@
-use std::net::UdpSocket;
 use inquire::{Confirm, Select, Text};
+use std::net::UdpSocket;
+use std::thread;
 
 mod rustymq;
 
@@ -10,6 +11,10 @@ fn main() {
     .prompt()
     .unwrap();
     println!("rustyMq URL: {}", rustymq_url);
+
+    thread::spawn(move || {  
+        data.recv_msg();
+    }).join().expect("recv msg thread completed.")
 
     // Example using a confirmation prompt
     // let confirm = Confirm::new("Are you sure?")
