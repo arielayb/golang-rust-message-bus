@@ -1,8 +1,34 @@
 use inquire::{Confirm, Select, Text};
-use std::net::UdpSocket;
-use std::thread;
+use rustymq::DataPackage;
+use std::net::TcpStream;
+use std::{string, thread};
 
 mod rustymq;
+
+struct InitQueue {
+    rtmq_url: String,
+    rtmq_uuid: String,
+}
+
+impl InitQueue {
+    fn init_queue(self) {
+        if let Ok(mut stream) = TcpStream::connect(&self.rtmq_url) {
+            println!("RustyMQ Stream created, {:?}", self.rtmq_url);
+          //TODO: start setting up the queue creation and messages.
+
+            loop {
+                
+            }
+
+
+        } else {
+            println!("Couldn't create RustyMQ Tcp Stream!")
+        }
+        
+            
+        // socket.close(None);
+    }
+}
 
 fn main() {
     // Example using a text prompt
@@ -12,8 +38,14 @@ fn main() {
     .unwrap();
     println!("rustyMq URL: {}", rustymq_url);
 
+    let queue: InitQueue = InitQueue{
+        rtmq_url: rustymq_url,
+        rtmq_uuid: string::String::from("some uuid"),
+    };
+
     thread::spawn(move || {  
-        data.recv_msg();
+    // init queue/tcp connection
+    queue.init_queue();
     }).join().expect("recv msg thread completed.")
 
     // Example using a confirmation prompt
