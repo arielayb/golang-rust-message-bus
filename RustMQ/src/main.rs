@@ -1,6 +1,6 @@
 use inquire::{Confirm, Select, Text};
 use rustymq::DataPackage;
-use std::net::TcpStream;
+use std::net::{TcpStream, TcpListener};
 use std::{string, thread};
 
 mod rustymq;
@@ -14,7 +14,7 @@ impl InitQueue {
     fn init_queue(self) {
         if let Ok(mut stream) = TcpStream::connect(&self.rtmq_url) {
             println!("RustyMQ Stream created, {:?}", self.rtmq_url);
-          //TODO: start setting up the queue creation and messages.
+            //TODO: start setting up the queue creation and messages.
 
             loop {
                 
@@ -36,18 +36,23 @@ fn main() {
     .with_default("rtmq://")
     .prompt()
     .unwrap();
-    println!("rustyMq URL: {}", rustymq_url);
+    println!("rustyMq URL: {}", &rustymq_url);
 
     let queue: InitQueue = InitQueue{
         rtmq_url: rustymq_url,
         rtmq_uuid: string::String::from("some uuid"),
     };
 
-    thread::spawn(move || {  
-    // init queue/tcp connection
-    queue.init_queue();
-    }).join().expect("recv msg thread completed.")
+    let listener = TcpListener::bind(queue.rtmq_url).unwrap();
 
+    for streams in listener.incoming() { 
+        if let Ok(stream) = streams {
+            thread::spawn(move || {  
+            // init queue/tcp connection
+            queue.init_queue();
+            }).join().expect("recv msg thread completed.")
+        }
+    }
     // Example using a confirmation prompt
     // let confirm = Confirm::new("Are you sure?")
     // .with_default(false)
