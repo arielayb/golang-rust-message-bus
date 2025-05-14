@@ -1,19 +1,17 @@
 use inquire::{Confirm, Select, Text};
 use rustymq::DataPackage;
-use std::net::{TcpStream, TcpListener};
+use std::net::{TcpStream, TcpListener, SocketAddr};
 use std::{string, thread};
 
 mod rustymq;
 
-struct InitQueue {
-    rtmq_url: String,
-    rtmq_uuid: String,
-}
+#[derive(Clone, Copy, Debug)]
+pub struct InitQueue;
 
 impl InitQueue {
-    fn init_queue(self) {
-        if let Ok(mut stream) = TcpStream::connect(&self.rtmq_url) {
-            println!("RustyMQ Stream created, {:?}", self.rtmq_url);
+    fn init_queue(self, stream: TcpStream, addr: SocketAddr) {
+        if let Ok(mut stream) = TcpStream::connect(addr) {
+            println!("RustyMQ Stream created, {:?}", addr);
             //TODO: start setting up the queue creation and messages.
 
             loop {
@@ -38,18 +36,15 @@ fn main() {
     .unwrap();
     println!("rustyMq URL: {}", &rustymq_url);
 
-    let queue: InitQueue = InitQueue{
-        rtmq_url: rustymq_url,
-        rtmq_uuid: string::String::from("some uuid"),
-    };
+    let queue: InitQueue = InitQueue{};
+    let addr: SocketAddr = rustymq_url.parse().expect("Cannot parse the url string");
+    let listener = TcpListener::bind(addr).unwrap();
 
-    let listener = TcpListener::bind(queue.rtmq_url).unwrap();
-
-    for streams in listener.incoming() { 
-        if let Ok(stream) = streams {
+    for stream in listener.incoming() { 
+        if let Ok(stream) = stream {
             thread::spawn(move || {  
             // init queue/tcp connection
-            queue.init_queue();
+            queue.init_queue(stream, addr);
             }).join().expect("recv msg thread completed.")
         }
     }
