@@ -1,6 +1,6 @@
 use inquire::{Confirm, Select, Text};
 use rustymq::DataPackage;
-use std::net::{TcpStream, TcpListener, SocketAddr};
+use std::net::{SocketAddr, TcpListener, TcpStream};
 use std::{string, thread};
 
 mod rustymq;
@@ -13,17 +13,11 @@ impl InitQueue {
         if let Ok(mut stream) = TcpStream::connect(addr) {
             println!("RustyMQ Stream created, {:?}", addr);
             //TODO: start setting up the queue creation and messages.
-
-            loop {
-                
-            }
-
-
+            loop {}
         } else {
             println!("Couldn't create RustyMQ Tcp Stream!")
         }
-        
-            
+
         // socket.close(None);
     }
 }
@@ -31,21 +25,25 @@ impl InitQueue {
 fn main() {
     // Example using a text prompt
     let rustymq_url: String = Text::new("Enter RustyMQ URL?")
-    .with_default("rtmq://")
-    .prompt()
-    .unwrap();
+        .with_default("127.0.0.1:8080")
+        .prompt()
+        .unwrap();
     println!("rustyMq URL: {}", &rustymq_url);
 
-    let queue: InitQueue = InitQueue{};
-    let addr: SocketAddr = rustymq_url.parse().expect("Cannot parse the url string");
+    let queue: InitQueue = InitQueue {};
+    let addr: SocketAddr = rustymq_url
+        .parse()
+        .expect("Cannot parse the url string! Did you include a port number?");
     let listener = TcpListener::bind(addr).unwrap();
 
-    for stream in listener.incoming() { 
+    for stream in listener.incoming() {
         if let Ok(stream) = stream {
-            thread::spawn(move || {  
-            // init queue/tcp connection
-            queue.init_queue(stream, addr);
-            }).join().expect("recv msg thread completed.")
+            thread::spawn(move || {
+                // init queue/tcp connection
+                queue.init_queue(stream, addr);
+            })
+            .join()
+            .expect("recv msg thread completed.")
         }
     }
     // Example using a confirmation prompt
