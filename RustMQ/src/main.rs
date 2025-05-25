@@ -1,9 +1,9 @@
 use inquire::{Confirm, Select, Text};
-use rustymq::DataPackage;
+use rustmq::DataPackage;
 use std::net::{SocketAddr, TcpListener, TcpStream};
 use std::{string, thread};
 
-mod rustymq;
+mod rustmq;
 
 #[derive(Clone, Copy, Debug)]
 pub struct InitQueue;
@@ -11,11 +11,11 @@ pub struct InitQueue;
 impl InitQueue {
     fn init_queue(self, stream: TcpStream, addr: SocketAddr) {
         if let Ok(mut stream) = TcpStream::connect(addr) {
-            println!("RustyMQ Stream created, {:?}", addr);
+            println!("RustMQ Stream created, {:?}", addr);
             //TODO: start setting up the queue creation and messages.
             loop {}
         } else {
-            println!("Couldn't create RustyMQ Tcp Stream!")
+            println!("Couldn't create RustMQ Tcp Stream!")
         }
 
         // socket.close(None);
@@ -24,14 +24,14 @@ impl InitQueue {
 
 fn main() {
     // Example using a text prompt
-    let rustymq_url: String = Text::new("Enter RustyMQ URL?")
+    let rustmq_url: String = Text::new("Enter RustMQ URL?")
         .with_default("127.0.0.1:8080")
         .prompt()
         .unwrap();
-    println!("rustyMq URL: {}", &rustymq_url);
+    println!("RustMq URL: {}", &rustmq_url);
 
     let queue: InitQueue = InitQueue {};
-    let addr: SocketAddr = rustymq_url
+    let addr: SocketAddr = rustmq_url
         .parse()
         .expect("Cannot parse the url string! Did you include a port number?");
     let listener = TcpListener::bind(addr).unwrap();

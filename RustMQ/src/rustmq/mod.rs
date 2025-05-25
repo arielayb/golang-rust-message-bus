@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::collections::VecDeque;
 use std::vec::Vec;
 
-trait RustyMQ<T> {
+trait RustMQ<T> {
     fn rusty_queue(&self, data_pkt: VecDeque<T>);
     fn rusty_stream(&self);
     fn rusty_write(&self, message: T);
@@ -16,7 +16,7 @@ pub struct DataPackage<T> {
     data_queue: VecDeque<T>,
 }
 
-impl<T> RustyMQ<T> for DataPackage<T> {
+impl<T> RustMQ<T> for DataPackage<T> {
     fn rusty_queue(&self, data_pkt: VecDeque<T>) {}
 
     fn rusty_stream(&self) {}
