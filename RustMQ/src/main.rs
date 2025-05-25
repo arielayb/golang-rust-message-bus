@@ -1,7 +1,10 @@
 use inquire::{Confirm, Select, Text};
 use rustmq::DataPackage;
+use std::collections::VecDeque;
+use std::io::Read;
 use std::net::{SocketAddr, TcpListener, TcpStream};
 use std::{string, thread};
+use uuid::Uuid;
 
 mod rustmq;
 
@@ -10,10 +13,22 @@ pub struct InitQueue;
 
 impl InitQueue {
     fn init_queue(self, stream: TcpStream, addr: SocketAddr) {
+        let mut buffer = vec![0; 1024];
         if let Ok(mut stream) = TcpStream::connect(addr) {
             println!("RustMQ Stream created, {:?}", addr);
+            let data_pkg = rustmq::DataPackage {
+                msg: String::from(""),
+                uuid: Uuid::new_v4().to_string(),
+                msg_queue: VecDeque::new(),
+            };
             //TODO: start setting up the queue creation and messages.
-            loop {}
+            loop {
+                let bytes_read = stream.read(&mut buffer);
+                if bytes_read > 0 {
+                    let received_data = String::from_utf8_lossy(&buffer[..bytes_read]);
+                    println!("Received: {}", received_data); // Print the received data
+                }
+            }
         } else {
             println!("Couldn't create RustMQ Tcp Stream!")
         }
@@ -46,17 +61,4 @@ fn main() {
             .expect("recv msg thread completed.")
         }
     }
-    // Example using a confirmation prompt
-    // let confirm = Confirm::new("Are you sure?")
-    // .with_default(false)
-    // .prompt()
-    // .unwrap();
-    // println!("Confirmation: {}", confirm);
-
-    // Example using a select prompt
-    // let options = vec!["Option 1", "Option 2", "Option 3"];
-    // let selected_option = Select::new("Select an option:", options)
-    // .prompt()
-    // .unwrap();
-    // println!("Selected: {}", selected_option);
 }
