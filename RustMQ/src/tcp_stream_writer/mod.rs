@@ -1,4 +1,4 @@
-use std::io::{self, Read};
+use std::io::{self, BufRead, Write};
 use std::net::{SocketAddr, TcpListener, TcpStream};
 
 pub struct TcpStreamWriter {
