@@ -1,5 +1,5 @@
 use std::io::{self, BufRead, Write};
-use std::net::{SocketAddr, TcpListener, TcpStream};
+use std::net::{TcpStream};
 
 pub struct TcpStreamWriter {
     reader: io::BufReader<TcpStream>,

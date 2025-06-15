@@ -1,9 +1,11 @@
+use crate::graph_system;
 use std::collections::HashMap;
 use std::collections::VecDeque;
 use std::vec::Vec;
 
+
 trait RustMQ<T> {
-    fn rustmq_create_queue(&mut self);
+    fn rustmq_create_queue(&mut self) -> &VecDeque<T>;
     fn rustmq_get_queue(&self) -> &VecDeque<T>;
     fn rustmq_set_queue(&mut self, msg_queue: VecDeque<T>);
     fn rustmq_stream(&self);
@@ -18,9 +20,11 @@ pub struct DataPackage<T> {
 }
 
 impl<T> RustMQ<T> for DataPackage<T> {
-    fn rustmq_create_queue(&mut self) {
+    fn rustmq_create_queue(&mut self) -> &VecDeque<T> {
         let data: VecDeque<T> = VecDeque::new();
         self.msg_queue = data;
+
+        return &self.msg_queue;
     }
 
     fn rustmq_get_queue(&self) -> &VecDeque<T> {

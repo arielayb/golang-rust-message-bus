@@ -1,5 +1,6 @@
 use array2d::{Array2D, Error};
-use bevy::log::info;
+use std::convert::TryInto;
+use tklog::{info, error};
 
 pub trait GraphBaseEvent {
     fn gen_empty_matrix(&mut self, num_vertices: usize);
