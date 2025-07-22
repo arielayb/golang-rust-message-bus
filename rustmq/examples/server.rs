@@ -1,7 +1,7 @@
 use inquire::{Confirm, Select, Text};
 use rustmq::rustmq_interface::DataPackage;
 use std::collections::VecDeque;
-use std::io;
+use std::io::{self, Read};
 use std::net::{SocketAddr, TcpListener, TcpStream};
 use std::thread;
 use rustmq::tklog::{info, error};
@@ -12,9 +12,23 @@ use rustmq::prelude::{tcp_stream_writer::TcpStreamWriter};
 pub struct InitQueue;
 
 impl InitQueue {
-    fn init_queue(self, stream: TcpStream, addr: SocketAddr) {
+    fn init_queue(self, stream: TcpStream, addr: SocketAddr) -> io::Result<()> {
        //
-        let dpkg = DataPackage;
+
+        println!("RustMQ Stream created, {:?}", addr);
+        let mut tcp_stream_writer = TcpStreamWriter::new(stream)?;
+        //TODO: start setting up the queue creation and messages.
+        let message: Vec<u8> = tcp_stream_writer.read_message().into()?;
+        let data_pkg = DataPackage {
+            msg: &message,
+            uuid: Uuid::new_v4().to_string(),
+            msg_queue: VecDeque::new(),
+        };
+        // tcp_stream_writer.send_message(&message)?;
+        // let msg: String = data_pkg.msg.bytes()
+        info!("the message from client: {:#?}", &data_pkg.msg);
+
+        Ok(())
     }
 }
 
