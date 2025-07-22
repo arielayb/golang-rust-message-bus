@@ -12,23 +12,25 @@ use rustmq::prelude::{tcp_stream_writer::TcpStreamWriter};
 pub struct InitQueue;
 
 impl InitQueue {
-    fn init_queue(self, stream: TcpStream, addr: SocketAddr) -> io::Result<()> {
+    fn init_queue(self, stream: TcpStream, addr: SocketAddr) -> io::Result<Vec<u8>> {
        //
 
         println!("RustMQ Stream created, {:?}", addr);
         let mut tcp_stream_writer = TcpStreamWriter::new(stream)?;
         //TODO: start setting up the queue creation and messages.
-        let message: Vec<u8> = tcp_stream_writer.read_message().into()?;
+        let message: Vec<u8> = tcp_stream_writer.read_message()?;
         let data_pkg = DataPackage {
-            msg: &message,
+            msg: message,
             uuid: Uuid::new_v4().to_string(),
             msg_queue: VecDeque::new(),
         };
         // tcp_stream_writer.send_message(&message)?;
-        // let msg: String = data_pkg.msg.bytes()
-        info!("the message from client: {:#?}", &data_pkg.msg);
+        // let msg: St
+        // info!("the message from client: {:#?}", &msg);
 
-        Ok(())
+        
+
+        Ok(data_pkg.msg.to_vec())
     }
 }
 
@@ -50,7 +52,7 @@ fn main() {
         if let Ok(stream) = stream {
             thread::spawn(move || {
                 // init queue/tcp connection
-                let _ = queue.init_queue(stream, addr);
+                let q: Result<Vec<u8>, io::Error> = queue.init_queue(stream, addr);
             })
             .join()
             .expect("recv msg thread completed.")

@@ -25,6 +25,7 @@ impl TcpStreamWriter {
     /// Read a received message from the TcpStream
     pub fn read_message(&mut self) -> io::Result<Vec<u8>> {
         let mut line: Vec<u8> = Vec::new();
+        
         // Use `BufRead::read_line()` to read a line from the TcpStream
         // self.reader.read(line.as_slice())?;
         self.reader.read(&mut line);
