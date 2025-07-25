@@ -13,8 +13,6 @@ pub struct InitQueue;
 
 impl InitQueue {
     fn init_queue(self, stream: TcpStream, addr: SocketAddr) -> io::Result<Vec<u8>> {
-       //
-
         println!("RustMQ Stream created, {:?}", addr);
         let mut tcp_stream_writer = TcpStreamWriter::new(stream)?;
         //TODO: start setting up the queue creation and messages.
@@ -26,9 +24,7 @@ impl InitQueue {
         };
         // tcp_stream_writer.send_message(&message)?;
         // let msg: St
-        // info!("the message from client: {:#?}", &msg);
-
-        
+        info!("the message from client: {:#?}", &message);
 
         Ok(data_pkg.msg.to_vec())
     }
