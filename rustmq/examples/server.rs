@@ -23,10 +23,10 @@ impl InitQueue {
             msg_queue: VecDeque::new(),
         };
         // tcp_stream_writer.send_message(&message)?;
-        // let msg: St
-        info!("the message from client: {:#?}", &message);
+        let stream_msg = String::from_utf8_lossy(&data_pkg.msg).into_owned();
+        println!("the message from client: {}", stream_msg);
 
-        Ok(data_pkg.msg.to_vec())
+        Ok(data_pkg.msg)
     }
 }
 
@@ -48,7 +48,7 @@ fn main() {
         if let Ok(stream) = stream {
             thread::spawn(move || {
                 // init queue/tcp connection
-                let q: Result<Vec<u8>, io::Error> = queue.init_queue(stream, addr);
+                let _q: Result<Vec<u8>, io::Error> = queue.init_queue(stream, addr);
             })
             .join()
             .expect("recv msg thread completed.")
