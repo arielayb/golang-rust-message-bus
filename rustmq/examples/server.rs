@@ -1,6 +1,6 @@
 use inquire::Text;
 use rustmq::prelude::tcp_stream_writer::TcpStreamWriter;
-use rustmq::rustmq_interface::RustMQ;
+use rustmq::rustmq_interface::{RustMQ, RustMQInterface};
 use rustmq::tklog::{error, info};
 use rustmq::{Uuid, rustmq_interface::DataPackage};
 use std::collections::VecDeque;
@@ -44,28 +44,23 @@ fn main() {
         .expect("Cannot parse the url string! Did you include a port number?");
     let listener = TcpListener::bind(addr).unwrap();
     println!("RustMQ Stream created, {:?}", addr);
-
-    //let mut tcp_stream_writer = TcpStreamWriter::new(stream)?;
-    //TODO: start setting up the queue creation and messages.
-    //let message: Vec<u8> = tcp_stream_writer.read_message()?;
-    /*let mut data_pkg = DataPackage {
-        msg: vec![],
-        uuid: Uuid::new_v4().to_string(),
-        msg_queue: VecDeque::new(),
-    };*/
-
+    
     for stream in listener.incoming() {
-        let mut data_pkg = DataPackage {
-            msg: Box::new(Vec::new()),
+        let data_pkg = DataPackage {
+            msg: Vec::new(),
             uuid: Uuid::new_v4().to_string(),
             msg_queue: VecDeque::new(),
         };
 
+        let mut rustmq = RustMQ {
+            data_pkg: data_pkg
+        };
+        
         if let Ok(stream) = stream {
             thread::spawn(move || {
                 // init queue/tcp connection
                 //let _q: Result<Vec<u8>, io::Error> = queue.init_queue(stream, addr);
-                let _q: _ = data_pkg.rustmq_init_queue(addr, stream);
+                let _q: _ = rustmq.rustmq_init_queue(addr, stream);
             })
             .join()
             .expect("recv msg thread completed.")

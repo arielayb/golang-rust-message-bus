@@ -28,7 +28,8 @@ impl TcpStreamWriter {
         
         // Use `BufRead::read_line()` to read a line from the TcpStream
         // self.reader.read(line.as_slice())?;
-        self.reader.read(&mut line);
+        // self.reader.read(&mut line);
+        let _ = self.reader.read_to_end(&mut line);
         line.pop(); // Drop the trailing "\n"
         Ok(line)
     }
