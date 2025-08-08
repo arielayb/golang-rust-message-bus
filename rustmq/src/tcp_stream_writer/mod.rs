@@ -1,5 +1,5 @@
-use std::io::{self, BufRead, Read, Write};
-use std::net::{TcpStream};
+use std::io::{self, BufRead, IoSliceMut, Read, Write};
+use std::net::TcpStream;
 
 pub struct TcpStreamWriter {
     reader: io::BufReader<TcpStream>,
@@ -25,11 +25,10 @@ impl TcpStreamWriter {
     /// Read a received message from the TcpStream
     pub fn read_message(&mut self) -> io::Result<Vec<u8>> {
         let mut line: Vec<u8> = Vec::new();
-        
+
         // Use `BufRead::read_line()` to read a line from the TcpStream
-        // self.reader.read(line.as_slice())?;
-        // self.reader.read(&mut line);
-        let _ = self.reader.read_to_end(&mut line);
+        //self.reader.read(&mut line)?;
+        let _ = self.reader.read_to_end(&mut line)?;
         line.pop(); // Drop the trailing "\n"
         Ok(line)
     }

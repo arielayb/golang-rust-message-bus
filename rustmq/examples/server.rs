@@ -38,13 +38,12 @@ fn main() {
         .unwrap();
     info!("RustMq URL: {}", &rustmq_url);
 
-    let queue: InitQueue = InitQueue {};
     let addr: SocketAddr = rustmq_url
         .parse()
         .expect("Cannot parse the url string! Did you include a port number?");
     let listener = TcpListener::bind(addr).unwrap();
     println!("RustMQ Stream created, {:?}", addr);
-    
+
     for stream in listener.incoming() {
         let data_pkg = DataPackage {
             msg: Vec::new(),
@@ -52,15 +51,13 @@ fn main() {
             msg_queue: VecDeque::new(),
         };
 
-        let mut rustmq = RustMQ {
-            data_pkg: data_pkg
-        };
-        
+        let mut rustmq = RustMQ { data_pkg: data_pkg };
+
         if let Ok(stream) = stream {
             thread::spawn(move || {
                 // init queue/tcp connection
                 //let _q: Result<Vec<u8>, io::Error> = queue.init_queue(stream, addr);
-                let _q: _ = rustmq.rustmq_init_queue(addr, stream);
+                let _q: Result<&Vec<u8>, io::Error> = rustmq.rustmq_init_queue(addr, stream);
             })
             .join()
             .expect("recv msg thread completed.")
