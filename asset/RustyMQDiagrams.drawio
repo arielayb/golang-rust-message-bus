@@ -1,36 +1,109 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
-  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="683" dy="393" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="t3c2Qm-DTPWxT1zjsb2r" name="RustMQ top view">
+    <mxGraphModel dx="1434" dy="825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="RustyMQInterface" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="220" y="120" width="180" height="90" as="geometry">
-            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2hFkxaTEliBAUrcjFM98-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;" parent="1" source="2hFkxaTEliBAUrcjFM98-1" target="qMdKbCnAmRxgNijqO6vL-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qMdKbCnAmRxgNijqO6vL-1" value="Open a socket with the ip addr and port num" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2hFkxaTEliBAUrcjFM98-3" vertex="1" connectable="0">
+          <mxGeometry x="-0.15" y="-4" relative="1" as="geometry">
+            <mxPoint x="4" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="VecDeque&lt;T&gt; RustyQueue() " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        <mxCell id="2hFkxaTEliBAUrcjFM98-1" value="RustMQ URL String" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="320" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--2" value="Vec&lt;T&gt; RustyStream()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="52" width="180" height="26" as="geometry" />
+        <mxCell id="2hFkxaTEliBAUrcjFM98-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="2hFkxaTEliBAUrcjFM98-2" target="2hFkxaTEliBAUrcjFM98-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--6" value="RustyQueue" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="220" y="270" width="180" height="80" as="geometry">
-            <mxRectangle x="130" y="380" width="160" height="26" as="alternateBounds" />
+        <mxCell id="qMdKbCnAmRxgNijqO6vL-2" value="create a queue message bus with a channel" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2hFkxaTEliBAUrcjFM98-6" vertex="1" connectable="0">
+          <mxGeometry x="-0.1551" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--7" value="VecDeque&lt;T&gt; RustyQueue()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--6" vertex="1">
-          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        <mxCell id="2hFkxaTEliBAUrcjFM98-2" value="Queue Message Bus" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="460" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--8" value="Vec&lt;T&gt; RustyStream()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="zkfFHV4jXpPFQw0GAbJ--6" vertex="1">
-          <mxGeometry y="52" width="180" height="26" as="geometry" />
+        <mxCell id="2hFkxaTEliBAUrcjFM98-4" value="Client 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="777" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zkfFHV4jXpPFQw0GAbJ--12" value="" style="endArrow=block;endSize=10;endFill=0;shadow=0;strokeWidth=1;rounded=0;curved=0;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="zkfFHV4jXpPFQw0GAbJ--6" target="zkfFHV4jXpPFQw0GAbJ--0" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="200" y="203" as="sourcePoint" />
-            <mxPoint x="200" y="203" as="targetPoint" />
+        <mxCell id="2hFkxaTEliBAUrcjFM98-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="2hFkxaTEliBAUrcjFM98-5" target="2hFkxaTEliBAUrcjFM98-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="685" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="400" y="710" />
+              <mxPoint x="160" y="710" />
+            </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-5" value="Queue Channel" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="2hFkxaTEliBAUrcjFM98-8" target="2hFkxaTEliBAUrcjFM98-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qMdKbCnAmRxgNijqO6vL-4" value="Start the RustMQ app" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2hFkxaTEliBAUrcjFM98-9" vertex="1" connectable="0">
+          <mxGeometry x="-0.1464" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-8" value="Initiator" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="2hFkxaTEliBAUrcjFM98-10" target="2hFkxaTEliBAUrcjFM98-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="685" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="710" />
+              <mxPoint x="400" y="710" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-10" value="Client 2" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="270" y="777" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=classic;startFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="2hFkxaTEliBAUrcjFM98-11" target="2hFkxaTEliBAUrcjFM98-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="660" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="501" y="710" />
+              <mxPoint x="400" y="710" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-11" value="Client 3" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="441" y="778" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=classic;startFill=1;" parent="1" source="2hFkxaTEliBAUrcjFM98-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="650" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="670" y="710" />
+              <mxPoint x="400" y="710" />
+            </Array>
+            <mxPoint x="670" y="771" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qMdKbCnAmRxgNijqO6vL-3" value="accept incoming messages from the client" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="2hFkxaTEliBAUrcjFM98-15" vertex="1" connectable="0">
+          <mxGeometry x="0.8813" relative="1" as="geometry">
+            <mxPoint y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-12" value="Client N" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="610" y="777" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-16" value="" style="swimlane;startSize=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="699" width="670" height="273" as="geometry">
+            <mxRectangle x="80" y="699" width="50" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2hFkxaTEliBAUrcjFM98-17" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Clients&lt;br&gt;&lt;/h1&gt;&lt;div&gt;A full list of n number of clients with the correct key can join and listen for messages from the queue channel.&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="2hFkxaTEliBAUrcjFM98-16" vertex="1">
+          <mxGeometry x="10" y="152" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="qMdKbCnAmRxgNijqO6vL-5" value="RustMQ Interfacee" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="290" y="430" width="220" height="240" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

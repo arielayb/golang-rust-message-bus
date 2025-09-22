@@ -1,0 +1,15 @@
+[package]
+name = "rustmq"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies.uuid]
+version = "1.17.0"
+# Lets you generate random UUIDs
+features = ["v4"]
+
+[dependencies]
+array2d = "0.3.2"
+inquire = "0.7.5"
+packet = "0.1.4"
+tklog = "0.2.9"
