@@ -2,6 +2,8 @@
 
 RustMQ! The message bus made in Rust and using Golang for testing the RustMQ.
 
+![screenshot](asset/ferris_transparent.png)
+
 #### Use Examples:
 
 run the example server
